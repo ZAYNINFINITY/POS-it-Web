@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, Menu, X } from "lucide-react";
+import { Download, Menu, Moon, Sun, X } from "lucide-react";
 import styles from "./Navbar.module.css";
 
 function useActiveSection(ids) {
@@ -29,15 +29,16 @@ function useActiveSection(ids) {
 
 const SECTION_IDS = ["features", "showcase", "pricing", "faq"];
 const NAV_LINKS = [
-  { href: "#features", label: "Features",    section: "features" },
-  { href: "#showcase", label: "Product tour", section: "showcase" },
-  { href: "#pricing",  label: "Pricing",      section: "pricing"  },
-  { href: "#faq",      label: "FAQ",          section: "faq"      },
+  { href: "/#features", label: "Features",    section: "features" },
+  { href: "/#showcase", label: "Product tour", section: "showcase" },
+  { href: "/#pricing",  label: "Pricing",      section: "pricing"  },
+  { href: "/#faq",      label: "FAQ",          section: "faq"      },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen]         = useState(false);
+  const [theme, setTheme]       = useState("dark");
   const activeSection           = useActiveSection(SECTION_IDS);
 
   useEffect(() => {
@@ -51,6 +52,24 @@ export default function Navbar() {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [open]);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("pos-it-theme");
+    if (saved === "light" || saved === "dark") {
+      document.documentElement.dataset.theme = saved;
+      const raf = window.requestAnimationFrame(() => setTheme(saved));
+      return () => window.cancelAnimationFrame(raf);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setTheme((current) => {
+      const next = current === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      window.localStorage.setItem("pos-it-theme", next);
+      return next;
+    });
+  };
 
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""} glass`}>
@@ -85,8 +104,21 @@ export default function Navbar() {
         </nav>
 
         <div className={styles.actions}>
-          <Link href="mailto:support@pos-it.app" className={`btn btn-ghost ${styles.support}`}>Support</Link>
-          <Link href="#pricing" className="btn btn-accent">
+          <Link href="/email-support" className={`btn btn-ghost ${styles.support}`}>Support</Link>
+          <button
+            type="button"
+            className={styles.themeToggle}
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-pressed={theme === "light"}
+          >
+            <span className={styles.themeTrack} aria-hidden="true">
+              <span className={styles.themeThumb}>
+                {theme === "dark" ? <Moon size={13} /> : <Sun size={13} />}
+              </span>
+            </span>
+          </button>
+          <Link href="/download" className="btn btn-accent">
             <Download size={14} strokeWidth={2.25} />
             Download free
           </Link>
@@ -134,7 +166,16 @@ export default function Navbar() {
                   {l.label}
                 </Link>
               ))}
-              <Link href="#pricing" className="btn btn-accent" style={{ width: "100%", marginTop: "0.5rem" }} onClick={() => setOpen(false)}>
+              <button
+                type="button"
+                className={styles.mobileTheme}
+                onClick={toggleTheme}
+              >
+                {theme === "dark" ? <Moon size={16} /> : <Sun size={16} />}
+                {theme === "dark" ? "Dark mode" : "Light mode"}
+                <span>{theme === "dark" ? "Switch to light" : "Switch to dark"}</span>
+              </button>
+              <Link href="/download" className="btn btn-accent" style={{ width: "100%", marginTop: "0.5rem" }} onClick={() => setOpen(false)}>
                 <Download size={14} /> Download free
               </Link>
             </div>

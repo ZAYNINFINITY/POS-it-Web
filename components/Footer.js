@@ -4,22 +4,22 @@ import styles from "./Footer.module.css";
 
 const LINKS = {
   Product: [
-    { label: "Download",       href: "#pricing" },
-    { label: "Pricing",        href: "#pricing" },
-    { label: "Features",       href: "#features" },
-    { label: "Product tour",   href: "#showcase" },
-    { label: "How it works",   href: "#how-it-works" },
+    { label: "Download",       href: "/download" },
+    { label: "Pricing",        href: "/pricing" },
+    { label: "Features",       href: "/features" },
+    { label: "Product tour",   href: "/product-tour" },
+    { label: "How it works",   href: "/how-it-works" },
   ],
   Resources: [
-    { label: "Getting started",     href: "#how-it-works" },
-    { label: "CSV import guide",    href: "#faq" },
-    { label: "License activation",  href: "#faq" },
-    { label: "FAQ",                 href: "#faq" },
+    { label: "Getting started",     href: "/getting-started" },
+    { label: "CSV import guide",    href: "/csv-import-guide" },
+    { label: "License activation",  href: "/license-activation" },
+    { label: "FAQ",                 href: "/faq" },
   ],
   Support: [
-    { label: "Email support",       href: "mailto:support@pos-it.com" },
-    { label: "WhatsApp helpline",   href: "https://wa.me/923001234567" },
-    { label: "Report a bug",        href: "mailto:bugs@pos-it.com" },
+    { label: "Email support",       href: "/email-support" },
+    { label: "WhatsApp helpline",   href: "/whatsapp-helpline" },
+    { label: "Report a bug",        href: "/report-a-bug" },
   ],
 };
 

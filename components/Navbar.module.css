@@ -46,6 +46,53 @@
 .actions { display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0; }
 .support { font-size: 0.875rem; color: var(--text-secondary); }
 
+.themeToggle {
+  width: 42px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  transition: background 0.15s, color 0.15s;
+}
+
+.themeToggle:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.themeTrack {
+  width: 34px;
+  height: 20px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-strong);
+}
+
+.themeThumb {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #08090b;
+  background: var(--accent);
+  transform: translateX(0);
+  transition: transform 0.18s var(--ease-out), background 0.18s var(--ease-out);
+}
+
+:global([data-theme="light"]) .themeThumb {
+  transform: translateX(14px);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
 /* ── Mobile toggle ── */
 .toggle {
   display: none; color: var(--text-secondary);
@@ -64,6 +111,27 @@
 }
 .mobileLink:hover { color: var(--text-primary); background: var(--bg-tertiary); }
 .mobileLinkActive { color: var(--accent) !important; }
+
+.mobileTheme {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem var(--space-3);
+  margin-top: var(--space-2);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.mobileTheme span {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
 
 @media (max-width: 768px) {
   .nav, .actions { display: none; }

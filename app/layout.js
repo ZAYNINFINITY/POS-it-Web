@@ -20,7 +20,7 @@ export const metadata = {
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "POS-it" }],
   },
   twitter: { card: "summary_large_image", title: "POS-it — Offline POS", images: ["/og-image.png"] },
-  icons: { icon: "/pos logo.png", shortcut: "/pos logo.png", apple: "/pos logo.png" },
+  icons: { icon: "/logo.svg", shortcut: "/logo.svg", apple: "/pos logo.png" },
   alternates: { canonical: BASE_URL },
 };
 
@@ -47,10 +47,16 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-theme="dark"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("pos-it-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t;}catch(e){}`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
