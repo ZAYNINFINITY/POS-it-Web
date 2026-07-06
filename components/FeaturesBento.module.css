@@ -1,0 +1,318 @@
+/* Alternate section bg so the page breathes */
+.section { background: var(--bg-secondary); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+
+.heading {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto var(--space-16);
+}
+.headingTitle {
+  margin-top: var(--space-4);
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  line-height: 1.12;
+}
+.headingSub {
+  margin-top: var(--space-4);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* ── Cell base ── */
+.cell {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.cell:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+/* Large hero cell */
+.cellLarge {
+  grid-column: span 2;
+  grid-row: span 2;
+  padding: var(--space-8);
+}
+
+/* Wide cell */
+.cellWide { grid-column: span 2; }
+
+/* ── Icon variants — each feature gets a unique accent ── */
+.cellIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.cell:hover .cellIcon { transform: scale(1.08); }
+
+.iconTeal   { background: var(--accent-dim);               border: 1px solid var(--accent-border); color: var(--accent); }
+.iconBlue   { background: rgba(59,130,246,.1);             border: 1px solid rgba(59,130,246,.28); color: #60a5fa; }
+.iconAmber  { background: rgba(245,158,11,.1);             border: 1px solid rgba(245,158,11,.28); color: #fbbf24; }
+.iconPurple { background: rgba(139,92,246,.1);             border: 1px solid rgba(139,92,246,.28); color: #a78bfa; }
+
+/* ── Titles & text ── */
+.cellTitle {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+.cellLarge .cellTitle { font-size: 1.2rem; }
+.cellText {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+/* ── Offline status card ── */
+.statusCard {
+  margin-top: auto;
+  padding-top: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.statusHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-1);
+}
+.statusBadge, .statusBadgeGreen {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+}
+.statusBadge      { background: rgba(239,68,68,.1);  border: 1px solid rgba(239,68,68,.25); color: #f87171; }
+.statusBadgeGreen { background: rgba(34,197,94,.1);  border: 1px solid rgba(34,197,94,.25); color: #4ade80; }
+.statusDotRed  { width: 5px; height: 5px; border-radius: 50%; background: #ef4444; animation: blink 2s step-end infinite; }
+.statusDotGreen{ width: 5px; height: 5px; border-radius: 50%; background: #22c55e; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.statusRows {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.statusRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+}
+.statusRow:last-child { border-bottom: none; }
+.statusLabel { color: var(--text-muted); }
+.statusOk    { color: #4ade80; }
+.statusOff   { color: var(--text-muted); }
+
+/* ── DB path badge ── */
+.dbBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding: 5px 9px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+.dbDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.75)} }
+.dbPath {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Mini stats (inventory cell) ── */
+.miniStatRow {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-subtle);
+}
+.miniStat { display: flex; flex-direction: column; gap: 3px; }
+.miniStatLabel {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.miniStatValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.amber { color: #fbbf24; }
+.red   { color: #f87171; }
+
+/* ── Receipt preview (Receipts cell) ── */
+.receiptPreview {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--border-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.receiptLine {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+.receiptDivider {
+  border-top: 1px dashed var(--border-subtle);
+  margin: 2px 0;
+}
+.receiptTotal {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* ── Ledger rows (Udhar cell) ── */
+.ledgerRows {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ledgerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+}
+.ledgerName { color: var(--text-secondary); }
+.ledgerBalance {
+  color: #a78bfa;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+/* ── Column-mapping rows (CSV import cell) ── */
+.mapRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-2);
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+}
+.mapArrow { color: var(--text-muted); flex-shrink: 0; }
+.mapPill {
+  padding: 3px 7px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+.mapPillMatched {
+  padding: 3px 7px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+}
+
+/* ── Role badges (Roles cell) ── */
+.roleBadges {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.roleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+.roleDotAdmin, .roleDotCashier {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.roleDotAdmin   { background: #60a5fa; }
+.roleDotCashier { background: var(--accent); }
+
+/* ── Spec badges (Hardware cell) ── */
+.specRow {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.specBadge {
+  font-size: 0.7rem;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  background: rgba(245,158,11,.1);
+  border: 1px solid rgba(245,158,11,.28);
+  color: #fbbf24;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .cellLarge { grid-column: span 2; grid-row: span 1; }
+}
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; gap: 8px; }
+  .cellLarge, .cellWide { grid-column: span 1; }
+}

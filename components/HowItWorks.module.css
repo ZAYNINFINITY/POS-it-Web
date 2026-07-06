@@ -1,0 +1,31 @@
+.section { background:var(--bg-secondary); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); }
+.heading { text-align:center; max-width:580px; margin:0 auto var(--space-16); }
+.title { margin-top:var(--space-4); font-size:clamp(1.75rem,3.2vw,2.4rem); font-weight:700; letter-spacing:-.035em; line-height:1.1; color:var(--text-primary); }
+.sub { margin-top:var(--space-4); font-size:1.0625rem; line-height:1.65; color:var(--text-secondary); }
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-6); position:relative; }
+.step {
+  background:var(--bg-tertiary); border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg); padding:var(--space-8) var(--space-6);
+  position:relative; display:flex; flex-direction:column; gap:var(--space-3);
+  transition:border-color .2s, transform .25s var(--ease-out);
+}
+.step:hover { border-color:var(--accent-border); transform:translateY(-3px); }
+.step:hover .stepIcon { background:var(--accent); color:#08090b; border-color:var(--accent); }
+.connector {
+  position:absolute; top:54px;
+  right:calc(var(--space-6) / -2);
+  width:calc(var(--space-6) + 4px); height:1px;
+  background:linear-gradient(to right,var(--border-strong),var(--border-subtle));
+  z-index:1; pointer-events:none;
+}
+.stepIcon {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:44px; height:44px; border-radius:var(--radius-md);
+  background:var(--accent-dim); border:1px solid var(--accent-border);
+  color:var(--accent); flex-shrink:0;
+  transition:background .2s, color .2s, border-color .2s;
+}
+.stepNum { font-size:.7rem; font-weight:700; letter-spacing:.08em; color:var(--accent); font-family:var(--font-mono); }
+.stepTitle { font-size:1.05rem; font-weight:600; letter-spacing:-.02em; color:var(--text-primary); line-height:1.25; }
+.stepBody { font-size:.9rem; line-height:1.65; color:var(--text-secondary); flex:1; }
+@media(max-width:900px){ .steps{ grid-template-columns:1fr; gap:var(--space-4); } .connector{ display:none; } }

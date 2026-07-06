@@ -1,0 +1,71 @@
+.header {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100; height: var(--nav-height);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s, background 0.25s;
+}
+.scrolled { border-color: var(--border-subtle); }
+
+.inner { height: 100%; display: flex; align-items: center; gap: var(--space-8); }
+
+/* ── Logo ── */
+.logo { display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0; }
+.logoImg {
+  width: 30px; height: 30px; border-radius: 7px; object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,181,173,.25));
+  transition: filter 0.2s;
+}
+.logo:hover .logoImg { filter: drop-shadow(0 2px 10px rgba(0,181,173,.45)); }
+.logoText { font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); }
+
+/* ── Desktop nav ── */
+.nav { display: flex; align-items: center; gap: var(--space-1); flex: 1; }
+
+.navLink {
+  position: relative;
+  font-size: 0.875rem; font-weight: 500; color: var(--text-secondary);
+  padding: 0.4rem 0.65rem; border-radius: var(--radius-sm);
+  transition: color 0.15s, background 0.15s;
+}
+.navLink:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+.navLinkActive { color: var(--text-primary) !important; }
+
+/*
+  Animated underline — a 2px teal bar that slides between active links.
+  Framer Motion's layoutId="nav-indicator" handles the smooth position
+  interpolation; we only need to define what it looks like.
+*/
+.navIndicator {
+  position: absolute;
+  bottom: 1px; left: var(--space-2); right: var(--space-2);
+  height: 2px; border-radius: 1px;
+  background: var(--accent);
+}
+
+/* ── Actions ── */
+.actions { display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0; }
+.support { font-size: 0.875rem; color: var(--text-secondary); }
+
+/* ── Mobile toggle ── */
+.toggle {
+  display: none; color: var(--text-secondary);
+  padding: var(--space-1); border-radius: var(--radius-sm);
+  transition: color 0.15s, background 0.15s;
+}
+.toggle:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+
+/* ── Mobile panel ── */
+.mobile { overflow: hidden; border-top: 1px solid var(--border-subtle); background: var(--bg-primary); }
+.mobileLinks { padding: var(--space-4) 0 var(--space-5); display: flex; flex-direction: column; gap: var(--space-1); }
+.mobileLink {
+  font-size: 1rem; font-weight: 500; color: var(--text-secondary);
+  padding: 0.65rem var(--space-2); border-radius: var(--radius-sm);
+  transition: color 0.15s, background 0.15s;
+}
+.mobileLink:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+.mobileLinkActive { color: var(--accent) !important; }
+
+@media (max-width: 768px) {
+  .nav, .actions { display: none; }
+  .toggle { display: flex; margin-left: auto; }
+}
